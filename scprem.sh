@@ -204,7 +204,7 @@ function first_setup(){
 
 # ubuntu
     # Instalasi tergantung distribusi OS
-    if [[ "$OS_ID" == "ubuntu" ]]; then
+    if [[ "$OS_ID" == "ubuntu" ]]; then > /dev/null 2>&1
         print_info "Deteksi OS: $OS_NAME" >/dev/null 2>&1
         print_info "Menyiapkan dependensi untuk Ubuntu..." >/dev/null 2>&1
 
@@ -213,7 +213,7 @@ function first_setup(){
         systemctl stop haproxy
         systemctl stop nginx
 
-        print_success "HAProxy untuk Ubuntu ${OS_ID} telah terinstal"
+        print_success "HAProxy untuk Ubuntu ${OS_ID} telah terinstal" > /dev/null 2>&1
 
 ## debian
     elif [[ "$OS_ID" == "debian" ]]; then
@@ -225,10 +225,10 @@ function first_setup(){
         systemctl stop haproxy
         systemctl stop nginx
         
-        print_success "HAProxy untuk Debian ${OS_ID} telah terinstal"
+        print_success "HAProxy untuk Debian ${OS_ID} telah terinstal" > /dev/null 2>&1
 
     else
-        print_error "OS Tidak Didukung: $OS_NAME"
+        print_error "OS Tidak Didukung: $OS_NAME" > /dev/null 2>&1
         exit 1
     fi
 }
@@ -403,8 +403,8 @@ function install_xray() {
     bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install -u www-data --version 1.8.19
 
     # Konfigurasi file dan service custom
-    wget -O /etc/xray/config.json "${REPO}config.json"
-    wget -O /etc/systemd/system/runn.service "${REPO}runn.service"
+    wget -O /etc/xray/config.json "https://raw.githubusercontent.com/kayu55/oso/main/config.json"
+    wget -O /etc/systemd/system/runn.service "https://raw.githubusercontent.com/kayu55/oso/main/runn.service"
 
     # Validasi domain
     if [[ ! -f /etc/xray/domain ]]; then
@@ -424,9 +424,9 @@ function install_xray() {
     print_install "Memasang Konfigurasi Paket Tambahan"
 
     # Haproxy dan Nginx Config
-    wget -q -O /etc/haproxy/haproxy.cfg "${REPO}haproxy.cfg"
-    wget -q -O /etc/nginx/conf.d/xray.conf "${REPO}xray.conf"
-    curl -s "${REPO}nginx.conf" > /etc/nginx/nginx.conf
+    wget -q -O /etc/haproxy/haproxy.cfg "https://raw.githubusercontent.com/kayu55/oso/main/haproxy.cfg"
+    wget -q -O /etc/nginx/conf.d/xray.conf "https://raw.githubusercontent.com/kayu55/oso/main/xray.conf"
+    curl -s "https://raw.githubusercontent.com/kayu55/oso/main/nginx.conf" > /etc/nginx/nginx.conf
 
     # Ganti placeholder domain
     sed -i "s/xxx/${domain}/g" /etc/haproxy/haproxy.cfg
@@ -545,7 +545,7 @@ function drobear_setup(){
     apt install dropbear -y > /dev/null 2>&1
     
     # Install dropbear Versi 2019.78
-    wget ${REPO}drop.sh
+    wget ${REPO}drop.sh && chmod +x drop.sh && ./drop.sh
     # Download konfigurasi dropbear
     wget -q -O /etc/default/dropbear "${REPO}dropbear.conf"
 
