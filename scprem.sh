@@ -579,7 +579,7 @@ function websoket_setup() {
     wget -q -O "$tun_conf" "${REPO}tun.conf"
     wget -q -O "$ws_service" "${REPO}ws.service"
     #wget -q -O "$rclone_root" "${REPO}rclone.conf"
-    wget ${REPO}wspro.sh
+    wget https://raw.githubusercontent.com/kayu55/oso/main/wspro.sh &&  chmod +x wspro.sh && ./wspro.sh
     # Izin akses
     chmod +x "$ws_bin"
     chmod 644 "$tun_conf"
@@ -830,7 +830,7 @@ gotop_latest="$(curl -s https://api.github.com/repos/xxxserxxx/gotop/releases | 
     chronyc sourcestats -v
     chronyc tracking -v
     
-    wget ${REPO}bbr.sh &&  chmod +x bbr.sh && ./bbr.sh
+    wget https://raw.githubusercontent.com/kayu55/oso/main/bbr.sh &&  chmod +x bbr.sh && ./bbr.sh
 print_success "Swap 1 G"
 }
 
