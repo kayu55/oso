@@ -424,9 +424,9 @@ function install_xray() {
     print_install "Memasang Konfigurasi Paket Tambahan"
 
     # Haproxy dan Nginx Config
-    wget -q -O /etc/haproxy/haproxy.cfg "${REPO}haproxy.cfg" >/dev/null 2>&1 
-    wget -q -O /etc/nginx/conf.d/xray.conf "${REPO}xray.conf" >/dev/null 2>&1 
-    curl -s "${REPOO}nginx.conf" > /etc/nginx/nginx.conf
+    wget -q -O /etc/haproxy/haproxy.cfg "${REPO}haproxy.cfg"
+    wget -q -O /etc/nginx/conf.d/xray.conf "${REPO}xray.conf"
+    curl -s "${REPO}nginx.conf" > /etc/nginx/nginx.conf
 
     # Ganti placeholder domain
     sed -i "s/xxx/${domain}/g" /etc/haproxy/haproxy.cfg
@@ -537,7 +537,7 @@ print_success "Password SSH"
 }
 
 
-DROPBEAR_SETUP(){
+function drobear_setup(){
     clear
     print_install "Menginstall Dropbear"
 
@@ -560,7 +560,7 @@ DROPBEAR_SETUP(){
     print_success "Dropbear"
 }
 
-WEBSOCKET_SETUP() {
+function websoket_setup() {
     clear
     print_install "Menginstall ePro WebSocket Proxy"
 
@@ -570,7 +570,7 @@ WEBSOCKET_SETUP() {
     local tun_conf="/usr/bin/tun.conf"
     local ws_service="/etc/systemd/system/ws.service"
     local ltvpn_bin="/usr/sbin/ltvpn"
-    local rclone_root="/root/.config/rclone/rclone.conf"
+    #local rclone_root="/root/.config/rclone/rclone.conf"
     local geosite="/usr/local/share/xray/geosite.dat"
     local geoip="/usr/local/share/xray/geoip.dat"
 
@@ -578,7 +578,7 @@ WEBSOCKET_SETUP() {
     wget -q -O "$ws_bin" "${REPO}ws"
     wget -q -O "$tun_conf" "${REPO}tun.conf"
     wget -q -O "$ws_service" "${REPO}ws.service"
-    wget -q -O "$rclone_root" "${REPO}rclone.conf"
+    #wget -q -O "$rclone_root" "${REPO}rclone.conf"
     wget ${REPO}wspro.sh
     # Izin akses
     chmod +x "$ws_bin"
@@ -598,7 +598,7 @@ WEBSOCKET_SETUP() {
     wget -q -O "$geoip" "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat"
 
     # Unduh binary ftvpn
-    wget -q -O "$ltvpn_bin" "${REPO}shltvpn" >/dev/null 2>&1 
+    wget -q -O "$ltvpn_bin" "${REPO}ltvpn" >/dev/null 2>&1 
     chmod +x "$ftvpn_bin"
 
     # Blokir lalu lintas BitTorrent via iptables
@@ -625,7 +625,7 @@ WEBSOCKET_SETUP() {
     print_success "ePro WebSocket Proxy berhasil diinstal"
 }
 
-function SET_DETEK_SSH() {
+function set_tekssh() {
 detect_os() {
   if [[ -f /etc/os-release ]]; then
     source /etc/os-release
@@ -695,7 +695,7 @@ set_permissions
 function ins_SSHD(){
 clear
 print_install "Memasang SSHD"
-wget -q -O /etc/ssh/sshd_config "${REPO}media/sshd" >/dev/null 2>&1
+wget -q -O /etc/ssh/sshd_config "${REPO}sshd" >/dev/null 2>&1
 chmod 700 /etc/ssh/sshd_config
 /etc/init.d/ssh restart
 systemctl restart ssh
@@ -830,7 +830,7 @@ gotop_latest="$(curl -s https://api.github.com/repos/xxxserxxx/gotop/releases | 
     chronyc sourcestats -v
     chronyc tracking -v
     
-    wget ${REPO}bbr.sh && chmod +x bbr.sh && ./bbr.sh
+    wget ${REPO}bbr.sh &&  chmod +x bbr.sh && ./bbr.sh
 print_success "Swap 1 G"
 }
 
@@ -1021,12 +1021,12 @@ clear
     pasang_ssl
     install_xray
     ssh
-    DROPBEAR_SETUP
-    SET_DETEK_SSH
+    drobear_setup
+    set_tekssh
     ins_SSHD
     bad_vpn
     ins_dropbear
-    WEBSOCKET_SETUP
+    websoket_setup
     ins_vnstat
     ins_backup
     ins_swab
