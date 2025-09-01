@@ -716,36 +716,25 @@ print_success "Dropbear"
 }
 
 function bad_vpn(){
-tesmatch=`screen -list | awk  '{print $1}' | grep -ow "badvpn" | sort | uniq`
-if [ "$tesmatch" = "badvpn" ]; then
-sleep 1
-echo -e "[ ${green}INFO$NC ] Screen badvpn detected"
-rm /root/screenlog > /dev/null 2>&1
-    runningscreen=( `screen -list | awk  '{print $1}' | grep -w "badvpn"` ) # sed 's/\.[^ ]*/ /g'
-    for actv in "${runningscreen[@]}"
-    do
-        cek=( `screen -list | awk  '{print $1}' | grep -w "badvpn"` )
-        if [ "$cek" = "$actv" ]; then
-        for sama in "${cek[@]}"; do
-            sleep 1
-            screen -XS $sama quit > /dev/null 2>&1
-            echo -e "[ ${red}CLOSE$NC ] Closing screen $sama"
-        done 
-        fi
-    done
-else
-echo -ne
-fi
+# install badvpn
 cd
-echo -e "[ ${green}INFO$NC ] Installing badvpn for game support..."
-wget -q -O /usr/bin/badvpn-udpgw "${REPO}newudpgw"
-chmod +x /usr/bin/badvpn-udpgw  >/dev/null 2>&1
-sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500' /etc/rc.local >/dev/null 2>&1
-sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500' /etc/rc.local >/dev/null 2>&1
-sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500' /etc/rc.local >/dev/null 2>&1
-systemctl daemon-reload >/dev/null 2>&1
-systemctl start rc-local.service >/dev/null 2>&1
-systemctl restart rc-local.service >/dev/null 2>&1
+wget -O /usr/sbin/badvpn "${REPO}badvpn" >/dev/null 2>&1
+chmod +x /usr/sbin/badvpn > /dev/null 2>&1
+wget -q -O /etc/systemd/system/badvpn1.service "${REPO}badvpn1.service" >/dev/null 2>&1
+wget -q -O /etc/systemd/system/badvpn2.service "${REPO}badvpn2.service" >/dev/null 2>&1
+wget -q -O /etc/systemd/system/badvpn3.service "${REPO}badvpn3.service" >/dev/null 2>&1
+systemctl disable badvpn1 
+systemctl stop badvpn1 
+systemctl enable badvpn1
+systemctl start badvpn1 
+systemctl disable badvpn2 
+systemctl stop badvpn2 
+systemctl enable badvpn2
+systemctl start badvpn2 
+systemctl disable badvpn3 
+systemctl stop badvpn3 
+systemctl enable badvpn3
+systemctl start badvpn3 
 }
 
 function ins_vnstat(){
