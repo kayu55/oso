@@ -167,7 +167,7 @@ print_install "Membuat direktori xray"
     chmod +x /var/log/xray
     touch /var/log/xray/access.log
     touch /var/log/xray/error.log
-    mkdir -p /var/lib/scrz-prem >/dev/null 2>&1
+    mkdir -p /var/lib/aryapro >/dev/null 2>&1
     # // Ram Information
     while IFS=":" read -r a b; do
     case $a in
@@ -313,7 +313,7 @@ echo -e ""
 read -p "   Masukan Domain: " host1
 echo -e ""
 echo -e "\033[1;96m___________________________________________\033[0m"
-echo "IP=" >> /var/lib/scrz-prem/ipvps.conf
+echo "IP=" >> /var/lib/aryapro/ipvps.conf
 echo $host1 > /etc/xray/domain
 echo $host1 > /root/domain
 echo ""
@@ -424,9 +424,9 @@ function install_xray() {
     print_install "Memasang Konfigurasi Paket Tambahan"
 
     # Haproxy dan Nginx Config
-    wget -q -O /etc/haproxy/haproxy.cfg "https://raw.githubusercontent.com/kayu55/oso/main/haproxy.cfg"
-    wget -q -O /etc/nginx/conf.d/xray.conf "https://raw.githubusercontent.com/kayu55/oso/main/xray.conf"
-    curl -s "https://raw.githubusercontent.com/kayu55/oso/main/nginx.conf" > /etc/nginx/nginx.conf
+    wget -q -O /etc/haproxy/haproxy.cfg "${REPO}haproxy.cfg"
+    wget -q -O /etc/nginx/conf.d/xray.conf "${REPO}xray.conf"
+    curl -s "${REPO}nginx.conf" > /etc/nginx/nginx.conf
 
     # Ganti placeholder domain
     sed -i "s/xxx/${domain}/g" /etc/haproxy/haproxy.cfg
@@ -579,7 +579,7 @@ function websoket_setup() {
     wget -q -O "$tun_conf" "${REPO}tun.conf"
     wget -q -O "$ws_service" "${REPO}ws.service"
     #wget -q -O "$rclone_root" "${REPO}rclone.conf"
-    wget https://raw.githubusercontent.com/kayu55/oso/main/wspro.sh &&  chmod +x wspro.sh && ./wspro.sh
+    wget ${REPO}wspro.sh &&  chmod +x wspro.sh && ./wspro.sh
     # Izin akses
     chmod +x "$ws_bin"
     chmod 644 "$tun_conf"
