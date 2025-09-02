@@ -9,9 +9,9 @@ wspro="/etc/whoiamluna"
 
 mkdir -p $wspro
 
-repo="https://raw.githubusercontent.com/kayu55/angin/main/"
+repo="https://raw.githubusercontent.com/kayu55/oso/main/"
 
-wget -q -O $wspro/ws.py "${repo}configure/ws.py"
+wget -q -O $wspro/ws.py "${repo}ws.py"
 chmod +x $wspro/ws.py
 
 
@@ -39,6 +39,5 @@ systemctl daemon-reload
 systemctl enable ws.service
 systemctl start ws.service
 systemctl restart ws.service
-
 
 rm -f $0
