@@ -3,9 +3,8 @@ clear
 fun_bar() {
 
 }
-res1() {
     # Fungsi: Menginstall swap 1GB dan alat monitoring gotop
-SWAPRAM_SETUP(){
+res1() {
     clear
     print_install "Memasang Swap 2 GB"
 
