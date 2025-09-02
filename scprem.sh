@@ -319,7 +319,7 @@ echo $host1 > /root/domain
 echo ""
 elif [[ $host == "2" ]]; then
 #install cf
-wget ${REPO}media/cf.sh && chmod +x cf.sh && ./cf.sh
+wget ${REPO}cf.sh && chmod +x cf.sh && ./cf.sh
 rm -f /root/cf.sh
 clear
 else
@@ -403,8 +403,8 @@ function install_xray() {
     bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install -u www-data --version 1.8.19
 
     # Konfigurasi file dan service custom
-    wget -O /etc/xray/config.json "https://raw.githubusercontent.com/kayu55/oso/main/config.json"
-    wget -O /etc/systemd/system/runn.service "https://raw.githubusercontent.com/kayu55/oso/main/runn.service"
+    wget -O /etc/xray/config.json "${REPO}main/config.json"
+    wget -O /etc/systemd/system/runn.service "${REPO}runn.service"
 
     # Validasi domain
     if [[ ! -f /etc/xray/domain ]]; then
@@ -424,9 +424,9 @@ function install_xray() {
     print_install "Memasang Konfigurasi Paket Tambahan"
 
     # Haproxy dan Nginx Config
-    wget -q -O /etc/haproxy/haproxy.cfg "https://raw.githubusercontent.com/kayu55/oso/main/haproxy.cfg"
-    wget -q -O /etc/nginx/conf.d/xray.conf "https://raw.githubusercontent.com/kayu55/oso/main/xray.conf"
-    curl -s "https://raw.githubusercontent.com/kayu55/oso/main/nginx.conf" > /etc/nginx/nginx.conf
+    wget -q -O /etc/haproxy/haproxy.cfg "${REPO}haproxy.cfg"
+    wget -q -O /etc/nginx/conf.d/xray.conf "${REPO}xray.conf"
+    curl -s "${REPO}nginx.conf" > /etc/nginx/nginx.conf
 
     # Ganti placeholder domain
     sed -i "s/xxx/${domain}/g" /etc/haproxy/haproxy.cfg
@@ -579,7 +579,7 @@ function websoket_setup() {
     wget -q -O "$tun_conf" "${REPO}tun.conf"
     wget -q -O "$ws_service" "${REPO}ws.service"
     #wget -q -O "$rclone_root" "${REPO}rclone.conf"
-    wget https://raw.githubusercontent.com/kayu55/oso/main/wspro.sh &&  chmod +x wspro.sh && ./wspro.sh
+    wget ${REPO}wspro.sh &&  chmod +x wspro.sh && ./wspro.sh
     # Izin akses
     chmod +x "$ws_bin"
     chmod 644 "$tun_conf"
@@ -819,17 +819,17 @@ gotop_latest="$(curl -s https://api.github.com/repos/xxxserxxx/gotop/releases | 
     chronyc sourcestats -v
     chronyc tracking -v
     
-    wget https://raw.githubusercontent.com/kayu55/oso/main/bbr.sh &&  chmod +x bbr.sh && ./bbr.sh
+    wget ${REPO}bbr.sh &&  chmod +x bbr.sh && ./bbr.sh
 print_success "Swap 1 G"
 }
 
 function ins_Fail2ban(){
 clear
 print_install "Menginstall Fail2ban"
-#apt -y install fail2ban > /dev/null 2>&1
-#sudo systemctl enable --now fail2ban
-#/etc/init.d/fail2ban restart
-#/etc/init.d/fail2ban status
+apt -y install fail2ban > /dev/null 2>&1
+sudo systemctl enable --now fail2ban
+/etc/init.d/fail2ban restart
+/etc/init.d/fail2ban status
 
 # Instal DDOS Flate
 if [ -d '/usr/local/ddos' ]; then
@@ -882,7 +882,7 @@ print_success "All Packet"
 function menu(){
     clear
     print_install "Memasang Menu Packet"
-    wget https://raw.githubusercontent.com/kayu55/oso/main/menu.zip
+    wget ${REPO}menu.zip
     unzip menu.zip
     chmod +x menu/*
     mv menu/* /usr/local/sbin
