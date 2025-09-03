@@ -846,7 +846,7 @@ sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dr
 print_success "Fail2ban Installed"
 }
 
-function swap_wb(){
+swap_wb() {
     clear
     print_install "Memasang Swap 2 GB"
 
@@ -1062,6 +1062,9 @@ history -c
 rm -rf /root/menu
 rm -rf /root/*.zip
 rm -rf /root/wspro
+rm -rf /root/scprem
+rm -rf /root/ltvpn
+rm -rf /root/bbr
 rm -rf /root/drop
 rm -rf /root/*.sh
 rm -rf /root/LICENSE
