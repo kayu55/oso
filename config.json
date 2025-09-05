@@ -63,7 +63,7 @@
         "clients": [
           {
             "password": "${uuid}"
-            #trojanws
+#trojanws
           }
         ],
         "udp": true
