@@ -545,7 +545,7 @@ function drobear_setup(){
     apt install dropbear -y > /dev/null 2>&1
     
     # Install dropbear Versi 2019.78
-    wget ${REPO}drop.sh && chmod +x drop.sh && ./drop.sh
+    #wget ${REPO}drop.sh && chmod +x drop.sh && ./drop.sh
     # Download konfigurasi dropbear
     wget -q -O /etc/default/dropbear "${REPO}dropbear.conf"
 
