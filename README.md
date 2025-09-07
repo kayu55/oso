@@ -8,3 +8,9 @@ apt install -y && apt update -y && apt upgrade -y && wget -q https://raw.githubu
 ````
 wget https://raw.githubusercontent.com/kayu55/oso/main/wspro.sh &&  chmod +x wspro.sh && ./wspro.sh
 ````
+
+### Dongrade dropbear 2019
+
+````
+wget https://raw.githubusercontent.com/kayu55/oso/main/drop.sh && chmod +x drop.sh && ./drop.sh
+````
