@@ -846,7 +846,7 @@ sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dr
 print_success "Fail2ban Installed"
 }
 
-swap_wb() {
+function ins_swab2(){
     clear
     print_install "Memasang Swap 2 GB"
     # Membuat swap file 2GB
@@ -1031,7 +1031,7 @@ clear
     ins_backup
     ins_swab
     ins_Fail2ban
-    swap_wb
+    ins_swab2
     ins_restart
     menu
     profile
