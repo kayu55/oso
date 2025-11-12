@@ -47,10 +47,13 @@
           }
         ]
       },
-      "streamSettings": {
+      "streamSettings":{
         "network": "ws",
         "wsSettings": {
-          "path": "/servlets/mms"
+          "path": "/",
+          "alpn": [
+            "h2",
+            "http/1.1"
         }
       }
     },
