@@ -17,7 +17,7 @@ CYANS="\033[0;36m"
 GOLD="\033[0;33m"
 RESET="\033[0m"
 printf "${BIRU}────────────────────────────────────────${RESET}\n"
-echo -e "\033[0;35m     FIX HAPROXY   \033[0m"
+echo -e "\033[0;35m  FIX HAPROXY OPOK \033[0m"
 printf "${BIRU}────────────────────────────────────────${RESET}\n"
 
 echo -e ""
@@ -99,9 +99,9 @@ if ! grep -q 'ssl_renew.sh' /var/spool/cron/crontabs/root;then (crontab -l;echo 
 
 #nginx config
 # Konfigurasi file dan service custom
-wget -O /etc/xray/config.json "${REPO}opok.json"
+wget -O /etc/xray/opok.json "${REPO}opok.json"
 wget -O /etc/systemd/system/runn.service "${REPO}runn.service"
-wget -O /etc/nginx/conf.d/xray.conf "${REPO}opok.conf"
+wget -O /etc/nginx/conf.d/opok.conf "${REPO}opok.conf"
 wget -O /etc/haproxy/haproxy.cfg "${REPO}opok.cfg"
 sed -i 's/xxx/$domain/' /etc/nginx/conf.d/opok.conf
 sed -i 's/xxx/$domain/' /etc/haproxy/opok.cfg
