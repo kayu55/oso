@@ -12,7 +12,6 @@ wget -O fix "raw.githubusercontent.com/kayu55/oso/main/fix" &&  chmod +x fix
 wget -O fixopok "raw.githubusercontent.com/kayu55/oso/main/fixopok" &&  chmod +x fixopok
 ````
 
-````
 ## vmes opok
 ````
 wget -O add-ws "raw.githubusercontent.com/kayu55/oso/main/add-ws" &&  chmod +x add-ws
