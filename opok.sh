@@ -403,8 +403,8 @@ function install_xray() {
     bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install -u www-data --version 1.8.19
 
     # Konfigurasi file dan service custom
-    wget -O /etc/xray/config.json "${REPO}config.json"
-    wget -O /etc/systemd/system/runn.service "${REPO}runn.service"
+    wget -O /etc/xray/opok.json "https://raw.githubusercontent.com/kayu55/oso/main/opok.json"
+    wget -O /etc/systemd/system/runn.service "https://raw.githubusercontent.com/kayu55/oso/main/runn.service"
 
     # Validasi domain
     if [[ ! -f /etc/xray/domain ]]; then
