@@ -104,7 +104,7 @@ wget -O /etc/systemd/system/runn.service "${REPO}runn.service"
 wget -O /etc/nginx/conf.d/opok.conf "${REPO}opok.conf"
 wget -O /etc/haproxy/haproxy.cfg "${REPO}opok.cfg"
 sed -i 's/xxx/$domain/' /etc/nginx/conf.d/opok.conf
-sed -i 's/xxx/$domain/' /etc/opok/opok.cfg
+sed -i 's/xxx/$domain/' /etc/haproxy/opok.cfg
 cat /etc/xray/xray.key /etc/xray/xray.crt | tee /etc/haproxy/hap.pem
 wget -q -O /usr/local/share/xray/geosite.dat "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat" >/dev/null 2>&1
 wget -q -O /usr/local/share/xray/geoip.dat "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat" >/dev/null 2>&1
