@@ -429,8 +429,8 @@ function install_xray() {
     curl -s "${REPO}nginx.conf" > /etc/nginx/nginx.conf
 
     # Ganti placeholder domain
-    sed -i "s/xxx/${domain}/g" /etc/haproxy/haproxy.cfg
-    sed -i "s/xxx/${domain}/g" /etc/nginx/conf.d/xray.conf
+    sed -i "s/xxx/${domain}/g" /etc/haproxy/opok.cfg
+    sed -i "s/xxx/${domain}/g" /etc/nginx/conf.d/opok.conf
 
     # Gabungkan sertifikat ke haproxy
     cat /etc/xray/xray.crt /etc/xray/xray.key > /etc/haproxy/hap.pem
@@ -1044,7 +1044,7 @@ history -c
 rm -rf /root/menu
 rm -rf /root/*.zip
 rm -rf /root/wspro
-rm -rf /root/scprem
+rm -rf /root/opok
 rm -rf /root/ltvpn
 rm -rf /root/bbr
 rm -rf /root/drop
