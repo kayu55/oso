@@ -5,6 +5,7 @@ cd /usr/local/sbin
 
 ````
 wget -O fix "raw.githubusercontent.com/kayu55/oso/main/fix" &&  chmod +x fix
+````
 
 ### FIX OPOK
 ````
