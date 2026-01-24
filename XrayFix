@@ -377,6 +377,7 @@ if [ -f /root/scdomain ];then
 rm /root/scdomain > /dev/null 2>&1
 fi
 clear
-rm -r ins-xray.sh
+#rm -r ins-xray.sh
+rm -r XrayFix
 
 exec bash
