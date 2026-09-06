@@ -11,8 +11,8 @@ mkdir -p $wspro1
 
 repo="https://raw.githubusercontent.com/kayu55/oso/main/"
 
-wget -q -O $wspro/ws.py "${repo}ws1.py"
-chmod +x $wspro/ws1.py
+wget -q -O $wspro1/ws1.py "${repo}ws1.py"
+chmod +x $wspro1/ws1.py
 
 
 # Installing Service
@@ -28,7 +28,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python3 -O $wspro/ws1.py 10015
+ExecStart=/usr/bin/python3 -O $wspro1/ws1.py 10015
 Restart=on-failure
 
 [Install]
