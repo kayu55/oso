@@ -316,7 +316,7 @@ rm -rf /usr/local/etc/xray/*.json
 rm -rf /usr/local/share/xray/geoip.dat
 rm -rf /usr/local/share/xray/geosite.dat
 rm -rf /var/log/xray/
-
+bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
 cat <<EOF> /etc/systemd/system/xray.service
 Description=Xray Service
 Documentation=https://github.com/xtls
