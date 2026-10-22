@@ -400,10 +400,10 @@ function install_xray() {
     chown www-data:www-data "$domainSock_dir"
 
     # Install Xray Core
-    bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
+    bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install -u www-data --version 1.8.19
 
     # Konfigurasi file dan service custom
-    wget -O /etc/xray/config.json "${REPO}config.json"
+    wget -O  /usr/local/etc/xray/config.json "${REPO}config.json"
     wget -O /etc/systemd/system/runn.service "${REPO}runn.service"
 
     # Validasi domain
@@ -447,7 +447,7 @@ User=www-data
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/local/bin/xray run -config /etc/xray/config.json
+ExecStart=/usr/local/bin/xray run -config /usr/local/etc/xray/config.json
 Restart=on-failure
 RestartPreventExitStatus=23
 LimitNPROC=10000
@@ -545,7 +545,7 @@ function drobear_setup(){
     apt install dropbear -y > /dev/null 2>&1
     
     # Install dropbear Versi 2019.78
-    #wget ${REPO}drop.sh && chmod +x drop.sh && ./drop.sh
+    wget ${REPO}drop.sh && chmod +x drop.sh && ./drop.sh
     # Download konfigurasi dropbear
     wget -q -O /etc/default/dropbear "${REPO}dropbear.conf"
 
