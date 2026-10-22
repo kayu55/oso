@@ -400,7 +400,7 @@ function install_xray() {
     chown www-data:www-data "$domainSock_dir"
 
     # Install Xray Core
-    bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install -u www-data --version 1.8.19
+    bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
 
     # Konfigurasi file dan service custom
     wget -O  /usr/local/etc/xray/config.json "${REPO}config.json"
