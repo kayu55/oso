@@ -71,6 +71,16 @@ rm -fr /var/log/xray/access.log
 rm -fr /var/log/xray/error.log
 rm -fr /var/log/xray/access2.log
 rm -fr /var/log/xray/error2.log
+chmod +x /etc/systemd/system/xray.service
+chmod +x /etc/systemd/system/xray@.service
+
+chmod +x /usr/local/bin/xray
+chmod +x /usr/local/etc/xray/*.json
+
+chmod +x /usr/local/share/xray/geoip.dat
+chmod +x /usr/local/share/xray/geosite.dat
+JSONS_PATH=/usr/local/etc/xray
+installed: /var/log/xray/
 # / / Ambil Xray Core Version Terbaru
 #latest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
 bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install --version 1.8.23
