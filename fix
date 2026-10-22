@@ -63,14 +63,14 @@ echo -e "[ ${green}INFO$NC ] Downloading & Installing xray core"
 domainSock_dir="/run/xray";! [ -d $domainSock_dir ] && mkdir  $domainSock_dir
 chown www-data.www-data $domainSock_dir
 # Make Folder XRay
-mkdir -p /var/log/xray
+rm -fr /var/log/xray
 mkdir -p /etc/xray
-chown www-data.www-data /var/log/xray
-chmod +x /var/log/xray
-touch /var/log/xray/access.log
-touch /var/log/xray/error.log
-touch /var/log/xray/access2.log
-touch /var/log/xray/error2.log
+rm -fr chown www-data.www-data /var/log/xray
+#chmod +x /var/log/xray
+rm -fr /var/log/xray/access.log
+rm -fr /var/log/xray/error.log
+rm -fr /var/log/xray/access2.log
+rm -fr /var/log/xray/error2.log
 # / / Ambil Xray Core Version Terbaru
 #latest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
 bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install --version 1.8.23
