@@ -400,7 +400,26 @@ function install_xray() {
     chown www-data:www-data "$domainSock_dir"
 
     # Install Xray Core
-    bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
+    echo -e "\n${green}╔═════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${green}║          ⚡ A R Y A  •  X R A Y  C O R E ⚡                 ║${NC}"
+    echo -e "${green}║             Menggunakan rilis stabil terbaru                ║${NC}"
+    echo -e "${green}╚═════════════════════════════════════════════════════════════╝${NC}"
+    echo -e "${green}➜ Menyiapkan direktori Xray...${NC}"
+    mkdir -p /usr/bin/xray /etc/xray /usr/local/etc/xray /usr/local/bin
+    
+    # ╔══════════════════════════════════════════════════════════════╗
+    # ║              📦 INSTALL X-RAY CORE STABLE TERBARU            ║
+    # ╚══════════════════════════════════════════════════════════════╝
+    echo -e "\n${green}✦ Mengunduh installer resmi Xray dan memasang versi stabil terbaru...${NC}"
+    if ! bash -c "$(curl -fsSL https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install; then
+    echo -e "\n${NC}❌ Instalasi Xray gagal. Periksa koneksi internet dan log installer."
+    exit 1
+fi
+if [ ! -x /usr/local/bin/xray ]; then
+    echo -e "❌ Binary Xray tidak ditemukan di /usr/local/bin/xray. Instalasi dibatalkan.${NC}"
+    exit 1
+fi
+/usr/local/bin/xray version || exit 1
 
     # Konfigurasi file dan service custom
     wget -O  /usr/local/etc/xray/config.json "${REPO}config.json"
