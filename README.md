@@ -4,11 +4,7 @@ cd /usr/local/sbin
 ````
 
 ````
-wget -O fix "raw.githubusercontent.com/kayu55/oso/main/fix" &&  chmod +x fix
-````
-
-````
-wget -O XrayFix "raw.githubusercontent.com/kayu55/oso/main/XrayFix" &&  chmod +x XrayFix
+wget -O upray "raw.githubusercontent.com/kayu55/oso/main/upray.sh" &&  chmod +x upray
 ````
 
 ### OSO
