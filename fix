@@ -63,24 +63,14 @@ echo -e "[ ${green}INFO$NC ] Downloading & Installing xray core"
 domainSock_dir="/run/xray";! [ -d $domainSock_dir ] && mkdir  $domainSock_dir
 chown www-data.www-data $domainSock_dir
 # Make Folder XRay
-rm -fr /var/log/xray
+mkdir -p /var/log/xray
 mkdir -p /etc/xray
-rm -fr chown www-data.www-data /var/log/xray
-#chmod +x /var/log/xray
-rm -fr /var/log/xray/access.log
-rm -fr /var/log/xray/error.log
-rm -fr /var/log/xray/access2.log
-rm -fr /var/log/xray/error2.log
-chmod +x /etc/systemd/system/xray.service
-chmod +x /etc/systemd/system/xray@.service
-
-chmod +x /usr/local/bin/xray
-chmod +x /usr/local/etc/xray/*.json
-
-chmod +x /usr/local/share/xray/geoip.dat
-chmod +x /usr/local/share/xray/geosite.dat
-JSONS_PATH=/usr/local/etc/xray
-installed: /var/log/xray/
+chown www-data.www-data /var/log/xray
+chmod +x /var/log/xray
+touch /var/log/xray/access.log
+touch /var/log/xray/error.log
+touch /var/log/xray/access2.log
+touch /var/log/xray/error2.log
 # / / Ambil Xray Core Version Terbaru
 echo -e "\n${green}╔═════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${green}║          ⚡ A R Y A  •  X R A Y  C O R E ⚡                 ║${NC}"
@@ -100,8 +90,6 @@ fi
 if [ ! -x /usr/local/bin/xray ]; then
     echo -e "❌ Binary Xray tidak ditemukan di /usr/local/bin/xray. Instalasi dibatalkan.${NC}"
     exit 1
-fi
-/usr/local/bin/xray version || exit 1
 ## crt xray
 systemctl stop nginx
 systemctl stop haproxy
