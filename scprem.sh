@@ -66,12 +66,12 @@ sleep 2
 ###### IZIN SC 
 
 # // Checking Os Architecture
-if [[ $( uname -m | awk '{print $1}' ) == "x86_64" ]]; then
-    echo -e "${OK} Your Architecture Is Supported ( ${green}$( uname -m )${NC} )"
-else
-    echo -e "${EROR} Your Architecture Is Not Supported ( ${YELLOW}$( uname -m )${NC} )"
-    exit 1
-fi
+#if [[ $( uname -m | awk '{print $1}' ) == "x86_64" ]]; then
+#    echo -e "${OK} Your Architecture Is Supported ( ${green}$( uname -m )${NC} )"
+#else
+#    echo -e "${EROR} Your Architecture Is Not Supported ( ${YELLOW}$( uname -m )${NC} )"
+#    exit 1
+#fi
 
 # // Checking System
 if [[ $( cat /etc/os-release | grep -w ID | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/ID//g' ) == "ubuntu" ]]; then
@@ -421,6 +421,16 @@ if [ ! -x /usr/local/bin/xray ]; then
 fi
 /usr/local/bin/xray version || exit 1
 
+    echo -e "\n${green}✦ Mengunduh installer resmi Xray dan memasang versi stabil terbaru...${NC}"
+    if ! bash -c "$(curl -fsSL https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install --version v1.8.23; then
+    echo -e "\n${NC}❌ Instalasi Xray gagal. Periksa koneksi internet dan log installer."
+    exit 1
+fi
+if [ ! -x /usr/local/bin/xray ]; then
+    echo -e "❌ Binary Xray tidak ditemukan di /usr/local/bin/xray. Instalasi dibatalkan.${NC}"
+    exit 1
+fi
+/usr/local/bin/xray version || exit 1
     # Konfigurasi file dan service custom
     wget -O  /usr/local/etc/xray/config.json "${REPO}config.json"
     wget -O /etc/systemd/system/runn.service "${REPO}runn.service"
